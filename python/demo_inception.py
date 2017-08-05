@@ -38,6 +38,9 @@ if __name__ == '__main__':
         if opt == '-i':
             path_test_image = arg
 
+    # Set ouput filename
+    path_output_image = path_test_image.replace(".png","_output.png")
+
     with tf.device(device):
         persisted_sess = tf.Session()
         inception_model_path = os.path.join('data', 'tensorflow_inception_graph.pb')
@@ -133,4 +136,5 @@ if __name__ == '__main__':
         plt.imshow(undo_image_avg(image_perturbed[0, :, :, :]).astype(dtype='uint8'), interpolation=None)
         plt.title(str_label_perturbed)
 
-        plt.show()
+        plt.savefig(path_output_image)
+        #plt.show()
